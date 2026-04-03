@@ -1,0 +1,187 @@
+Créer une application mobile 
+En html css(pur) JavaScript, icônes svg
+Pour les petits écrans (Smartphones- tablettes)
+Nom: StockMvt, icône : Dépôt/entrepôt/Magasin
+Thème par défaut : aucun, neutre, pas des couleurs chromatiques
+
+On début , on choisit une langue :
+- français 
+- anglais 
+- hindi 
+- Lingala (RDC)
+- Swahili (RDC)
+Avec des emojis 
+Pour l'instant faut juste écrire la traduction en Français dans le JavaScript 
+
+Ensuite : le mode : système, clair, sombre
+
+On aura un onboarding après : avec montrant l'importance : historique, traçabilité, analyse(mathématique: quantité disponible,... achats, pertes, ventes), organisation, un seul support, localisation, accès n'importe quel appareil, Sauvegarde automatique (cloud) multi-utilisateurs 
+
+On aura authentification Google : un texte en haut et continuer avec Google 
+
+On verra ensuite le choix entre : créer une entreprise ou rejoindre une entreprise 
+
+=> Créer une entreprise :
+Logo, nom, description, devise (à saisir), thème à sélectionner (proposer plusieurs couleurs chromatiques)
+
+Valider
+
+- Interface accueil :
+=> Cest l'interface mère qui permet d'accéder aux autres interfaces que je vais citer
+
+Autres interfaces :
+- Interface produits:
+-> barre de recherche, icône scanner, 
+Onglets : tous (nbre), en stock (nbre), stock faible (nbre), rupture (nbre) , surstock (nbre)
+On aura aussi : Un icône toogle (catégorie-produit) regroupe les produits de même catégorie dans une sélection à déballer/dérouler
+Note: les produits sans catégorie vont se mettre dans une sélection nommé : sans catégorie 
+
+Ordre des produits : les plus récents modifier en haut 
+
+On verra dans les produits : image, nom, code produit/code-barres quantité, statut
+
+On aura le bouton flottant (+) : ajout 
+
+- interface ajout produit:
+Zone image (prendre une photo, sélectionné dans la galerie)
+Nom, code-produit/code-barres avec 2 icônes : 1 pour générer un code produit et l'autre pour ouvrir un scanner, catégorie (à ajouter ou sélectionner)
+Emplacement + quantité (un produit peut avoir plusieurs emplacements qui ont des quantités)
+Quantité total 
+Quantité minimum, quantité maximum,
+Prix d'achat unitaire, prix vente unitaire, les prix Total, bénéfices et marge bénéficiaire 
+Notes : quelques notes 
+Enregistrer 
+
+Quand on clique sur un produit on verra :
+- > entrée, sortie, inventaire correctif, détails, QR code, supprimer 
+
+Dans entré on aura :
+Motif , comme motif principal : achat 
+Autres: Don, transfert, retour, autre
+Sélectionner un emplacement (nbre quantité)
+
+Quantité entrée 
+Prix unitaire d'achat 
+Aperçu : 
+Avant -> Après 
+Observations : petite note 
+Valider 
+
+De même pour la sortie 
+
+Dans inventaire :
+Sélectionner l'emplacement 
+Stock théorique/informatique 
+Stock réel/compter 
+
+Résultat:
+Écart 
+Observations : petite note
+Régulariser
+
+Dans détails on aura :
+Tous les informations sur le produit: 
+Infos supplémentaires : Date d'ajout, Date dernière modification, État actuel,...etc
+ on peut cliquer sur le bouton de modification pour retourner à l'interface d'ajout/modification 
+
+- interface historique :
+C'est juste les résultats des mouvements : entrée, sortie, inventaire correctif 
+On verra qui a fait quoi (utilisateur), quand (Date et heure), pourquoi (Motif, observations) , quantité entrée/sortie/écart, 
+quantité avant -> après => final
+On aura des onglets : tous (nbre), entrées (nbre), sorties(nbre), inventaires (nbre)
+Un icône calendrier avec : Cette semaine (par défaut), aujourd'hui, hier, choisir une date
+Note: on clic, on voit tous ces détails 
+
+- interface Notification :
+Les notifications concernent : stock faible, rupture, surstock 
+Onglets : Tous, Non lu (nbre)
+
+- interface Entreprise :
+-> Logo, nom, description (si présent), devise, thème 
+C'est le résultat de ce qu'on a fait en haut 
+On aura de boutons : éditer, changer d'entreprise, ajouter un utilisateur 
+On verra en bas : liste des utilisateurs l'admin en haut
+Quand on clique sur le bouton :
+- > éditer : on revient à l'interface de modification entreprise 
+-> ajouter un utilisateur : ça ouvre l'interface des autorisations avec :
+Produits : entrées, sorties, inventaire, créer, modifier, supprimer 
+Entreprise : éditer, ajouter un utilisateur, modifier les autorisations d'un utilisateur, supprimer un utilisateur, supprimer un administrateur 
+Note : ce sont des cases à cocher 
+Et un bouton : Générer le QR code 
+
+Quand on clique sur un utilisateur de la liste on verra : photo, nom, email (grâce à Google), ses autorisations et 2 boutons : modifier les autorisations et retirer l'utilisateur 
+
+=> Il y'aura aussi une zone pour quitter l'entreprise 
+
+- interface Rapports (ce sont des documents):
+- > section Rapport d'actualité avec :
+- état global stock 
+- en stock 
+- stock faible 
+- rupture 
+- surstock 
+Note : ce sont de types de rapports du groupe actualité (donc a 6 rapports ici)
+
+-> section  rapport budgétaire avec :
+- achats 
+- ventes
+- pertes (sorties sauf ventes)
+- rapport financier (achats, ventes, bénéfices, Marge bénéficiaire) ça c'est simple : 2 colonnes car c'est juste les total : achats, ventes, on fait le calcul qui donne les bénéfices, qui montre la marge bénéficiaire 
+Ce sont des calculs simples
+Pour les rapports budgétaires on doit choisir un intervalle : Date début - date fin => aperçu 
+Note : ce sont de types de rapports du groupe budgétaire
+
+Ordre dans la tableau (classement ): les plus en haut => les plus en stock, stock faible,..., les plus vendus, les plus acheter,...
+
+Les rapports ce sont des tableaux(comme des tableaux Excel) Professionnel : je veux tous les colonnes possibles concernant le détail d'un produit car on doit avoir la même mise en forme dans le PDF 
+on verra leur aperçu en cliquant dessus 
+
+Dans chaque rapport, au dessus du tableau : logo, nom entreprise, rapport concernant..., Date:.... , si c'est un intervalle (Du ... à ...), nombre d'articles, valeur du stock/achats/ventes/perte, responsable (utilisateur actuel), absolument tout information qu'on voit en haut d'un tableau 
+
+- interface menu :
+-> Profil utilisateur : photo, nom, email (Google)
+-> Entreprise (C'est ici qu'on accède à l'interface entreprise)
+- changer de langue 
+- changer de mode (système, clair, sombre)
+- sécurité :* code de pin avec interrupteur (switch) quand on clique dessus ça ouvre l'interface code pin, on entre, on confirme, 
+* Verrouillage Biométrique (empreinte digitale) avec interrupteur 
+* Question de sécurité de sécurité, on clique, ça Ouvre l'interface on demande à l'utilisateur une question dont il sera le seul à connaître la réponse et une réponse 
+
+- Sauvegarder ( exportation du fichier du sauvegarde)
+- Restaurer ( importation) : réserver à l'admin
+- cloud (statut) : Date et heure 
+
+- aide et supports/contactez-nous :
+* E-mail : lien vers e-mail 
+* WhatsApp : lien vers WhatsApp 
+
+- évaluer l'application 
+- termes et conditions : lien web
+- politique de confidentialité : lien web 
+
+- se déconnecter 
+- se déconnecter de tous les appareils 
+- supprimer le compte
+- version de l'application 
+
+Nav :Accueil, Produits, Historique, Rapport, Menu.
+icône de notification dans Accueil 
+
+À savoir :
+C'est une petite application, il n'y a rien de complexe là 
+Tout doit être beau, propre, moderne 
+- tous les noms dans le code doit être en français : class, id, fonction...
+
+il ne faut pas faire les fonctionnalités complexes comme :
+- authentification : Google 
+- Exportation pdf 
+- Génération QR code 
+On les fera après 
+
+Pour l'instant j'ai besoin besoin de voir l'aperçu de tout :
+- tableaux des rapports  : c'est le plus important 
+- produits dans la liste 
+- historiques 
+- notifications 
+
+Voilà

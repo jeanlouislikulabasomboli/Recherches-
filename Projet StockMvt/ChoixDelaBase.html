@@ -1,0 +1,434 @@
+Oui — mais il faut être très direct sur un point :
+
+Le combo exact “comme Supabase” + “PostgreSQL” + “Auth Google” + “stockage photos” + “gratuit” + “jamais mis en pause, même après des années” est presque introuvable en SaaS hébergé.
+
+Pourquoi ?
+Parce qu’un vrai backend PostgreSQL managé coûte de l’argent même quand personne ne l’utilise. C’est précisément pour ça que Supabase met les projets gratuits en pause, et que d’autres services font pareil. Supabase indique que les projets Free peuvent être pausés, alors que les plans payants ne le sont pas .
+Et ce n’est pas juste eux : Appwrite a même annoncé en 2026 une pause automatique après 7 jours d’inactivité sur le plan gratuit .
+
+Donc si ton exigence est “jamais mis en pause”, il faut raisonner comme ceci :
+
+
+---
+
+La réponse courte
+
+Le meilleur choix réaliste pour toi : Firebase
+
+…mais pas PostgreSQL.
+
+Si tu peux abandonner PostgreSQL, alors Firebase est probablement le plus proche de ce que tu veux :
+
+Auth Google → oui
+
+stockage de photos → oui
+
+JavaScript / HTML / CSS → oui, excellent
+
+gratuit pour petit projet → oui
+
+pas de “mise en pause projet” façon Supabase → en pratique, beaucoup plus adapté à l’hébergement “oublié mais toujours accessible”
+
+très stable sur le long terme → oui
+
+
+Firebase fonctionne surtout avec Cloud Firestore, pas PostgreSQL. Google documente un quota gratuit pour Firestore, sans parler d’un mécanisme de “pause projet inactif” comme Supabase/Appwrite .
+
+👉 Si ton vrai besoin est la fiabilité gratuite long terme, Firebase gagne.
+👉 Si ton vrai besoin absolu est PostgreSQL, alors gratuit + jamais mis en pause devient très difficile.
+
+
+---
+
+Verdict honnête selon ton besoin réel
+
+Si tu veux absolument PostgreSQL
+
+Alors ton meilleur chemin n’est probablement pas un BaaS cloud gratuit, mais :
+
+Option n°1 (la plus solide) : self-hosted
+
+Par exemple :
+
+Supabase self-hosted
+
+ou Appwrite self-hosted
+
+ou PocketBase (mais ce n’est pas PostgreSQL)
+
+
+Tu héberges ça toi-même sur :
+
+un petit VPS
+
+une machine perso
+
+un mini serveur
+
+ou un cloud low-cost
+
+
+Avantages
+
+jamais mis en pause par un fournisseur
+
+contrôle total
+
+vrai backend persistant
+
+tu peux garder ton projet des années
+
+
+Inconvénients
+
+ce n’est pas “gratuit cloud managé”
+
+il faut gérer un minimum :
+
+déploiement
+
+sauvegardes
+
+sécurité
+
+mises à jour
+
+
+
+👉 Si ton exigence “jamais suspendu” est non négociable, c’est la solution la plus sérieuse.
+
+
+---
+
+Mon classement concret pour ton cas
+
+
+---
+
+1) Firebase — meilleur choix pratique
+
+Recommandé si tu peux renoncer à PostgreSQL
+
+Ce que tu auras
+
+Google Auth : excellent
+
+Base de données : Firestore (NoSQL)
+
+Stockage photos : excellent
+
+JavaScript natif : excellent
+
+Hébergement long terme : très bon pour projet perso
+
+Plan gratuit : oui
+
+
+Pourquoi c’est probablement ton meilleur choix
+
+Parce que ton vrai problème n’est pas “je veux SQL”, ton vrai problème est :
+
+> “Je veux un backend gratuit qui reste vivant très longtemps sans qu’on me le coupe.”
+
+
+
+Et là, Firebase est beaucoup plus adapté que Supabase Free.
+
+Pour ton stack HTML / CSS / JavaScript
+
+C’est très simple :
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+</script>
+
+Donc oui : ça parle très bien avec du JavaScript pur.
+
+Mon avis
+
+Si ton projet est :
+
+portfolio
+
+galerie
+
+mini réseau social
+
+app simple
+
+app avec utilisateurs + photos
+
+
+➡️ prends Firebase et avance.
+
+
+---
+
+2) Supabase — meilleur DX, mais échoue sur ton exigence principale
+
+Recommandé seulement si tu acceptes la pause
+
+Ce que tu auras
+
+PostgreSQL : excellent
+
+Auth Google : oui
+
+Storage photos : oui
+
+JavaScript : excellent
+
+gratuit : oui
+
+
+Mais…
+
+Le problème, tu le connais déjà :
+
+les projets Free peuvent être pausés 
+
+
+Donc verdict
+
+Supabase est parfait techniquement,
+mais pas compatible avec ton exigence “toujours accessible après des mois/années d’inactivité”.
+
+➡️ Je ne te le recommande pas pour ce besoin précis.
+
+
+---
+
+3) Nhost — proche de Supabase sur le papier, mais à vérifier très prudemment
+
+Intéressant, mais pas mon choix n°1
+
+Nhost est souvent vu comme un “Supabase-like” :
+
+PostgreSQL
+
+Auth
+
+Storage
+
+GraphQL / backend moderne
+
+bon pour JS
+
+
+Le souci
+
+Le vrai point important pour toi n’est pas juste les features, mais :
+
+> “Est-ce que le projet gratuit reste vivant après très longtemps ?”
+
+
+
+Et sur ce genre de service, les politiques gratuites changent souvent.
+Donc même si aujourd’hui ça paraît bien, je ne bâtirais pas un projet “oublié pendant 2 ans” là-dessus sans lire les règles très précisément.
+
+Verdict
+
+➡️ à considérer,
+mais je ne le mettrais pas devant Firebase pour ton besoin exact.
+
+
+---
+
+4) Appwrite Cloud — à éviter pour ton besoin
+
+Je te le déconseille
+
+Sur le papier, Appwrite est séduisant :
+
+Auth
+
+DB
+
+Storage
+
+JS friendly
+
+
+Mais aujourd’hui, leur plan gratuit a aussi une logique de pause d’inactivité .
+
+➡️ Donc non, pas pour toi.
+
+
+---
+
+5) PocketBase — excellent… mais pas PostgreSQL et pas vraiment du “BaaS cloud gratuit managé”
+
+Très bon si tu acceptes de l’auto-hébergement
+
+PocketBase est très intéressant si tu veux :
+
+auth
+
+fichiers / photos
+
+backend simple
+
+JS facile
+
+projet qui reste vivant longtemps
+
+
+Mais il utilise SQLite, pas PostgreSQL .
+
+Pourquoi je le mentionne quand même
+
+Parce que pour beaucoup de projets HTML/CSS/JS simples, il fait très bien le travail.
+
+Le piège
+
+Il faut l’héberger toi-même ou via un hébergeur adapté.
+
+Verdict
+
+➡️ excellent si tu peux t’éloigner de PostgreSQL ET accepter un peu de self-hosting.
+
+
+---
+
+Ce que je te recommande vraiment (sans tourner autour du pot)
+
+Tu as 2 chemins sérieux :
+
+
+---
+
+CHEMIN A — Le plus simple et le plus fiable
+
+➜ Firebase
+
+Choisis ça si :
+
+tu veux un truc gratuit
+
+Google login
+
+photos
+
+JavaScript pur
+
+toujours disponible longtemps
+
+et tu acceptes pas PostgreSQL
+
+
+Mon verdict
+
+C’est mon meilleur conseil pour toi.
+
+
+---
+
+CHEMIN B — Le plus fidèle à Supabase
+
+➜ Supabase self-hosted ou Appwrite self-hosted
+
+Choisis ça si :
+
+tu veux vraiment PostgreSQL
+
+tu veux auth + storage + API
+
+tu refuses absolument la mise en pause
+
+tu acceptes de gérer un peu d’infra
+
+
+Mon verdict
+
+C’est le seul vrai moyen d’avoir PostgreSQL + “jamais suspendu”.
+
+Parce qu’en SaaS gratuit, cette promesse est rarement durable.
+
+
+---
+
+Ce que je te déconseille de croire
+
+Il y a beaucoup de services qui ont l’air de dire :
+
+> “Free forever”
+
+
+
+Mais en réalité, ils changent souvent les règles :
+
+pause après X jours
+
+suppression après Y mois
+
+quotas plus stricts
+
+besoin d’activité console
+
+nécessité de carte bancaire plus tard
+
+
+Donc si ton critère n°1 est :
+
+> “Je peux revenir dans 2 ans et tout marche encore.”
+
+
+
+Alors :
+
+Firebase = le meilleur choix “sans serveur à gérer”
+
+Self-hosted = le meilleur choix “solide techniquement”
+
+
+
+---
+
+Ma recommandation finale (très claire)
+
+Je te recommande ceci :
+
+Si tu peux vivre sans PostgreSQL :
+
+Prends Firebase
+
+Si PostgreSQL est obligatoire :
+
+Prends Supabase self-hosted
+
+ou
+
+Appwrite self-hosted
+
+Si tu veux “comme Supabase cloud gratuit mais jamais en pause” :
+
+ça n’existe pas vraiment de façon fiable aujourd’hui
+
+Et c’est ça la vérité utile ici.
+
+
+---
+
+Si tu veux, je peux maintenant te faire un tableau ultra concret avec seulement ces colonnes :
+
+Service
+
+PostgreSQL ?
+
+Google Auth ?
+
+Photos ?
+
+Gratuit ?
+
+Risque de pause ?
+
+Facile avec HTML/CSS/JS ?
+
+Recommandé ou non ?
+
+
+Je peux aussi te donner le meilleur choix exact selon ton projet si tu me dis juste :
+
+> **“Mon projet fait exactement X”**

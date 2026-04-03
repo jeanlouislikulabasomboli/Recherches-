@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rogner une image</title>
+
+  <!-- Cropper.js CSS -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.css"
+  />
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #111;
+      color: white;
+      min-height: 100vh;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    h1 {
+      font-size: 24px;
+      text-align: center;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    button,
+    label {
+      background: #2a2a2a;
+      color: white;
+      border: none;
+      padding: 12px 18px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 15px;
+      transition: 0.2s;
+    }
+
+    button:hover,
+    label:hover {
+      background: #3a3a3a;
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+
+    .image-container {
+      width: 100%;
+      max-width: 500px;
+      height: 400px;
+      background: #222;
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .image-container img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .result {
+      width: 100%;
+      max-width: 300px;
+      text-align: center;
+    }
+
+    .result img {
+      width: 100%;
+      border-radius: 16px;
+      margin-top: 10px;
+      border: 2px solid #333;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Rogner une photo</h1>
+
+  <div class="controls">
+    <label for="fileInput">Importer une image</label>
+    <input type="file" id="fileInput" accept="image/*" />
+
+    <button id="cropBtn">Rogner</button>
+    <button id="downloadBtn">Télécharger</button>
+  </div>
+
+  <div class="image-container">
+    <img id="image" src="" alt="Image à rogner" />
+  </div>
+
+  <div class="result">
+    <h2>Résultat</h2>
+    <img id="croppedImage" src="" alt="Image rognée" />
+  </div>
+
+  <!-- Cropper.js JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.js"></script>
+
+  <script>
+    const fileInput = document.getElementById("fileInput");
+    const image = document.getElementById("image");
+    const cropBtn = document.getElementById("cropBtn");
+    const downloadBtn = document.getElementById("downloadBtn");
+    const croppedImage = document.getElementById("croppedImage");
+
+    let cropper;
+    let croppedCanvas;
+
+    fileInput.addEventListener("change", (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        image.src = reader.result;
+
+        if (cropper) {
+          cropper.destroy();
+        }
+
+        image.onload = () => {
+          cropper = new Cropper(image, {
+            aspectRatio: 1, // carré
+            viewMode: 1,
+            dragMode: "move",
+            autoCropArea: 1,
+            responsive: true,
+            background: false,
+            movable: true,
+            zoomable: true,
+            scalable: false,
+            rotatable: false,
+            cropBoxMovable: true,
+            cropBoxResizable: true,
+            touchDragZoom: true
+          });
+        };
+      };
+
+      reader.readAsDataURL(file);
+    });
+
+    cropBtn.addEventListener("click", () => {
+      if (!cropper) return alert("Importe d'abord une image.");
+
+      croppedCanvas = cropper.getCroppedCanvas({
+        width: 500,
+        height: 500,
+        imageSmoothingQuality: "high"
+      });
+
+      croppedImage.src = croppedCanvas.toDataURL("image/png");
+    });
+
+    downloadBtn.addEventListener("click", () => {
+      if (!croppedCanvas) return alert("Rogne d'abord l'image.");
+
+      const link = document.createElement("a");
+      link.href = croppedCanvas.toDataURL("image/png");
+      link.download = "image-rognee.png";
+      link.click();
+    });
+  </script>
+
+</body>
+</html>
